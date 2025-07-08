@@ -1,6 +1,6 @@
 # Moderation bot
 
-# How to install
+# 🛠️ How to install
 
 ## Linux
 
@@ -27,6 +27,7 @@ ALTER USER postgres PASSWORD 'yourpassword';  # SET YOUR PASSWORD
 ## Windows
 
 https://www.python.org/downloads/ - Install Python
+
 https://www.postgresql.org/download/windows/ - Install postgres
 
 ```bash
