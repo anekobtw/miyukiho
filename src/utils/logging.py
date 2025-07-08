@@ -1,6 +1,9 @@
 from aiogram import Bot
+from dotenv import load_dotenv
+import os
+from aiogram.client.default import DefaultBotProperties
 
-from main import bot
+load_dotenv()
 
 bot = Bot(token=os.getenv("TOKEN"), default=DefaultBotProperties(parse_mode="HTML"))
 

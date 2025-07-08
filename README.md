@@ -11,7 +11,7 @@ sudo apt upgrade
 
 # Creating virtual environment
 python3 -m venv .venv
-source .venv\bin\activate
+source .venv/bin/activate
 cd src
 pip install -r requirements.txt
 
@@ -22,6 +22,7 @@ sudo systemctl enable postgresql
 sudo -i -u postgres
 psql
 ALTER USER postgres PASSWORD 'yourpassword';  # SET YOUR PASSWORD
+\q
 ```
 
 ## Windows
@@ -32,7 +33,7 @@ https://www.postgresql.org/download/windows/ - Install postgres
 
 ```bash
 # Creating virtual environment
-python3 -m venv .venv
+python -m venv .venv
 .\.venv\scripts\activate
 cd src
 pip install -r requirements.txt

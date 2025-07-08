@@ -29,7 +29,6 @@ async def mute(chat: types.Chat, user_id: int, duration: str):
         until_date=datetime.now() + timedelta(duration),
     )
 
-
 async def ban(chat: types.Chat, user_id: int, duration: str, revoke_messages: bool):
     if not chat or not user_id or not duration or not revoke_messages:
         return ValueError("Not enough arguments.")
