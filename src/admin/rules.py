@@ -7,7 +7,7 @@ router = Router()
 @router.message(Command("rules"))
 async def rules_cmd(message: types.Message):
     await message.answer(
-        f"""
+        """
 <b>ПРАВИЛА ЧАТА</b>
 
 <i>Если заметили нарушение — ответьте на сообщение командой /report.</i>

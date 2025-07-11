@@ -25,7 +25,7 @@ def create_table():
                 id SERIAL PRIMARY KEY,
                 admin_id BIGINT,
                 user_id BIGINT,
-                action TEXT CHECK (action IN ('ban', 'mute', 'unban', 'unmute')),
+                action TEXT CHECK (action IN ('ban', 'mute')),
                 reason TEXT,
                 timestamp TIMESTAMP DEFAULT now()
             );
@@ -34,7 +34,7 @@ def create_table():
 
 
 def insert_log(admin_id: int, user_id: int, action: str, reason: str = ""):
-    if action not in ("ban", "mute", "warn", "unban", "unmute"):
+    if action not in ("ban", "mute"):
         raise ValueError("Invalid action type")
 
     with psycopg2.connect(**DB_PARAMS) as conn, conn.cursor() as cur:
