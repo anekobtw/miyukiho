@@ -41,4 +41,3 @@ async def unban_cmd(message: types.Message):
     )
 
     await message.reply(f"✅ Пользователь @{reply.from_user.username} успешно разбанен!")
-
