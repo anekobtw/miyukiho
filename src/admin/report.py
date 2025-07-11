@@ -24,10 +24,12 @@ async def report(message: types.Message):
     await log(
         group_id=os.getenv("LOGS_CHANNEL"),
         text=f"""
-<b>❗ Новый репорт!</b>\n\n
-<b>От кого:</b> @{message.from_user.username}\n
-<b>На кого:</b> @{reply.from_user.username}\n
-<b>Сообщение:</b> {reply.text}\n\n
+<b>❗ Новый репорт!</b>
+
+<b>От кого:</b> @{message.from_user.username}
+<b>На кого:</b> @{reply.from_user.username}
+<b>Сообщение:</b> {reply.text}
+
 <b><a href='https://t.me/c/{str(message.chat.id)[4:]}/{reply.message_id}'>Ссылка на сообщение</a></b>
 """,
     )

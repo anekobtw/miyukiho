@@ -26,20 +26,12 @@ async def mute(chat: types.Chat, user_id: int, duration: str):
     await chat.restrict(
         user_id=user_id,
         permissions=types.ChatPermissions(can_send_messages=False),
-        until_date=datetime.now() + timedelta(duration),
+        until_date=datetime.now() + parse_time(duration),
     )
 
-async def ban(chat: types.Chat, user_id: int, duration: str, revoke_messages: bool):
-    if not chat or not user_id or not duration or not revoke_messages:
+
+async def ban(chat: types.Chat, user_id: int):
+    if not chat or not user_id:
         return ValueError("Not enough arguments.")
 
-    if duration:
-        until = datetime.now() + timedelta(duration)
-    else:
-        until = None
-
-    await chat.ban(
-        user_id=user_id,
-        until_date=until,
-        revoke_messages=revoke_messages
-    )
+    await chat.ban(user_id=user_id, revoke_messages=True)
