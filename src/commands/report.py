@@ -16,10 +16,12 @@ async def report_cmd(message: types.Message):
 <b>❗ Новый репорт!</b>
 
 <b>От кого:</b> @{message.from_user.username}
-<b>На кого:</b> @{reply.from_user.username}
-<b>Сообщение:</b> {reply.text}
+<b>На кого:</b> @{message.reply_to_message.from_user.username}
+<b>Сообщение:</b> {message.reply_to_message.text}
 
 <b><a href='https://t.me/c/{str(message.chat.id)[4:]}/{message.reply_to_message.message_id}'>Ссылка на сообщение</a></b>
+
+<b>#report #id{message.from_user.id} #id{message.reply_to_message.from_user.id}</b>
 """
 
     await log(text=text)
