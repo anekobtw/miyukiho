@@ -35,9 +35,13 @@ async def unban_cmd(message: types.Message):
         reason="",
     )
 
-    await log(
-        group_id=os.getenv("LOGS_CHANNEL"),
-        text=f"<b>✅ Разбан!</b>\n\n<b>Админ:</b> @{message.from_user.username}\n<b>Пользователь:</b> @{reply.from_user.username}",
-    )
+    text = f"""
+<b>✅ Разбан!</b>
+
+<b>Админ:</b> @{message.from_user.username}
+<b>Пользователь:</b> @{reply.from_user.username}
+"""
+
+    await log(text=text)
 
     await message.reply(f"✅ Пользователь @{reply.from_user.username} успешно разбанен!")

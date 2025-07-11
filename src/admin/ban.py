@@ -1,14 +1,10 @@
-import os
-
 from aiogram import F, Router, types
 from aiogram.filters.command import Command
-from dotenv import load_dotenv
 
 import database
 from utils.admin import ban
 from utils.logging import log
 
-load_dotenv()
 router = Router()
 
 
@@ -42,9 +38,14 @@ async def ban_cmd(message: types.Message):
         reason=" ".join(reason),
     )
 
-    await log(
-        group_id=os.getenv("LOGS_CHANNEL"),
-        text=f"<b>🚫 Новый бан!</b>\n\n<b>Админ:</b> @{message.from_user.username}\n<b>Пользователь:</b> @{reply.from_user.username}\n<b>Причина:</b> {' '.join(reason)}",
-    )
+    text = f"""
+<b>🚫 Новый бан!</b>
+
+<b>Админ:</b> @{message.from_user.username}
+<b>Пользователь:</b> @{reply.from_user.username}
+<b>Причина:</b> {' '.join(reason)}
+"""
+
+    await log(text=text)
 
     await message.reply(f"✅ Пользователь @{reply.from_user.username} успешно забанен!")

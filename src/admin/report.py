@@ -1,12 +1,8 @@
-import os
-
 from aiogram import F, Router, types
 from aiogram.filters.command import Command
-from dotenv import load_dotenv
 
 from utils.logging import log
 
-load_dotenv()
 router = Router()
 
 
@@ -21,9 +17,7 @@ async def report(message: types.Message):
         await message.reply("Пожалуйста, напишите команду ответом на сообщение.")
         return
 
-    await log(
-        group_id=os.getenv("LOGS_CHANNEL"),
-        text=f"""
+    text = f"""
 <b>❗ Новый репорт!</b>
 
 <b>От кого:</b> @{message.from_user.username}
@@ -31,7 +25,8 @@ async def report(message: types.Message):
 <b>Сообщение:</b> {reply.text}
 
 <b><a href='https://t.me/c/{str(message.chat.id)[4:]}/{reply.message_id}'>Ссылка на сообщение</a></b>
-""",
-    )
+"""
+
+    await log(text=text)
 
     await message.reply("✅ Репорт успешно отправлен! Спасибо за помощь!")

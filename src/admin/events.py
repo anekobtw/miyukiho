@@ -4,5 +4,5 @@ router = Router()
 
 
 @router.channel_post()
-async def channel_post_handler(channel_post: types.Message) -> Any:
+async def channel_post_handler(channel_post: types.Message):
     pass

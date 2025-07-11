@@ -1,15 +1,12 @@
-import os
 from datetime import datetime
 
 from aiogram import F, Router, types
 from aiogram.filters.command import Command
-from dotenv import load_dotenv
 
 import database
 from utils.admin import mute, parse_time
 from utils.logging import log
 
-load_dotenv()
 router = Router()
 
 
@@ -44,9 +41,15 @@ async def mute_cmd(message: types.Message):
         reason=" ".join(reason),
     )
 
-    await log(
-        group_id=os.getenv("LOGS_CHANNEL"),
-        text=f"<b>🚫 Новый мут!</b>\n\n<b>Админ:</b> @{message.from_user.username}\n<b>Пользователь:</b> @{reply.from_user.username}\n<b>До:</b> {until}\n<b>Причина:</b> {' '.join(reason)}",
-    )
+    text = f"""
+<b>🚫 Новый мут!</b>
+
+<b>Админ:</b> @{message.from_user.username}
+<b>Пользователь:</b> @{reply.from_user.username}
+<b>До:</b> {until}
+<b>Причина:</b> {' '.join(reason)}
+"""
+
+    await log(text=text)
 
     await message.reply(f"✅ Пользователь @{reply.from_user.username} успешно замучен до {until}!")
