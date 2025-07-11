@@ -38,9 +38,15 @@ def insert_log(admin_id: int, user_id: int, action: str, reason: str = ""):
 
     with psycopg2.connect(**DB_PARAMS) as conn, conn.cursor() as cur:
         cur.execute(
-            """
+        """
             INSERT INTO logs (admin_id, user_id, action, reason, timestamp)
             VALUES (%s, %s, %s, %s, %s)
         """,
             (admin_id, user_id, action, reason, datetime.utcnow()),
         )
+
+
+def get_user(user_id: int):
+    with psycopg2.connect(**DB_PARAMS) as conn, conn.cursor() as cur:
+        cur.execute("""SELECT * FROM logs WHERE user_id = %s""", (user_id,))
+        return cur.fetchall()

@@ -7,14 +7,14 @@ router = Router()
 
 
 @router.message(Command("report"))
-async def report(message: types.Message):
+async def report_cmd(message: types.Message):
     member = await message.chat.get_member(message.from_user.id)
     if not isinstance(member, (types.ChatMember)):
         return
 
     reply = message.reply_to_message
     if not reply:
-        await message.reply("Пожалуйста, напишите команду ответом на сообщение.")
+        await message.reply("❗ Пожалуйста, используйте команду в ответ на сообщение пользователя.")
         return
 
     text = f"""

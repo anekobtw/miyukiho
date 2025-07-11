@@ -20,7 +20,7 @@ async def mute_cmd(message: types.Message):
     # Is the message a reply?
     reply = message.reply_to_message
     if not reply:
-        await message.reply("Пожалуйста, напишите команду ответом на сообщение.")
+        await message.reply("❗ Пожалуйста, используйте команду в ответ на сообщение пользователя.")
         return
 
     # Is there enough arguments?
