@@ -8,6 +8,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from dotenv import load_dotenv
 
 import admin
+import database
 
 
 async def run_bot() -> None:
@@ -19,6 +20,7 @@ async def run_bot() -> None:
         datefmt="%H:%M:%S",
     )
 
+    database.create_table()
     bot = Bot(token=os.getenv("TOKEN"), default=DefaultBotProperties(parse_mode="HTML"))
     storage = MemoryStorage()
     dp = Dispatcher(storage=storage)

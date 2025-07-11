@@ -5,6 +5,7 @@ from aiogram import F, Router, types
 from aiogram.filters.command import Command
 from dotenv import load_dotenv
 
+import database
 from utils.admin import mute, parse_time
 from utils.logging import log
 
@@ -33,12 +34,19 @@ async def mute_cmd(message: types.Message):
         return
 
     # Mute and log
-    until = datetime.now() + parse_time(duration)
+    until = (datetime.now() + parse_time(duration)).strftime("%d %B %Y %H:%M:%S")
     await mute(chat=message.chat, user_id=reply.from_user.id, duration=duration)
+
+    database.insert_log(
+        admin_id=message.from_user.id,
+        user_id=reply.from_user.id,
+        action="mute",
+        reason=" ".join(reason),
+    )
 
     await log(
         group_id=os.getenv("LOGS_CHANNEL"),
-        text=f"<b>🚫 Новый мут!</b>\n\n<b>Админ:</b> @{message.from_user.username}\n<b>Пользователь:</b> @{reply.from_user.username}\n<b>До:</b> {until.strftime("%d %B %Y %H:%M:%S")}\n<b>Причина:</b> {' '.join(reason)}",
+        text=f"<b>🚫 Новый мут!</b>\n\n<b>Админ:</b> @{message.from_user.username}\n<b>Пользователь:</b> @{reply.from_user.username}\n<b>До:</b> {until}\n<b>Причина:</b> {' '.join(reason)}",
     )
 
-    await message.reply(f"✅ Пользователь @{reply.from_user.username} успешно замучен до {until.strftime("%d %B %Y %H:%M:%S")}!")
+    await message.reply(f"✅ Пользователь @{reply.from_user.username} успешно замучен до {until}!")
