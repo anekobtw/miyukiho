@@ -29,7 +29,8 @@ def create_table():
                 reason TEXT,
                 timestamp TIMESTAMP DEFAULT now()
             );
-        """)
+        """
+        )
 
 
 def insert_log(admin_id: int, user_id: int, action: str, reason: str = ""):
@@ -38,7 +39,7 @@ def insert_log(admin_id: int, user_id: int, action: str, reason: str = ""):
 
     with psycopg2.connect(**DB_PARAMS) as conn, conn.cursor() as cur:
         cur.execute(
-        """
+            """
             INSERT INTO logs (admin_id, user_id, action, reason, timestamp)
             VALUES (%s, %s, %s, %s, %s)
         """,

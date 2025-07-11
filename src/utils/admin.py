@@ -40,5 +40,5 @@ async def ban(chat: types.Chat, user_id: int):
 async def unban(chat: types.Chat, user_id: int):
     if not chat or not user_id:
         return ValueError("Not enough arguments.")
-    
+
     await chat.unban(user_id=user_id, only_if_banned=True)

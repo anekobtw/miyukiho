@@ -1,24 +1,12 @@
 from aiogram import F, Router, types
 from aiogram.filters.command import Command
-import database
 
+import database
 
 router = Router()
 
-ACTION_TRANSLATIONS = {
-    "ban": "Бан",
-    "unban": "Разбан",
-    "mute": "Мут",
-    "unmute": "Размут",
-}
-
-ACTION_EMOJIS = {
-    "ban": "⛔",
-    "unban": "✅",
-    "mute": "🔇",
-    "unmute": "🔊",
-    "warn": "⚠️"
-}
+ACTION_TRANSLATIONS = {"ban": "Бан", "unban": "Разбан", "mute": "Мут", "unmute": "Размут"}
+ACTION_EMOJIS = {"ban": "⛔", "unban": "✅", "mute": "🔇", "unmute": "🔊"}
 
 
 @router.message(Command("info"))
