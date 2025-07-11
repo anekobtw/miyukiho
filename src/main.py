@@ -7,12 +7,10 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.fsm.storage.memory import MemoryStorage
 from dotenv import load_dotenv
 
-import admin
-import database
+import commands
 
 
 async def run_bot() -> None:
-    load_dotenv()
     logging.basicConfig(
         force=True,
         level=logging.INFO,
@@ -20,12 +18,11 @@ async def run_bot() -> None:
         datefmt="%H:%M:%S",
     )
 
-    database.create_table()
-    bot = Bot(token=os.getenv("TOKEN"), default=DefaultBotProperties(parse_mode="HTML"))
+    bot = Bot(token=os.getenv("BOT_TOKEN"), default=DefaultBotProperties(parse_mode="HTML"))
     storage = MemoryStorage()
     dp = Dispatcher(storage=storage)
 
-    dp.include_router(admin.router)
+    dp.include_router(commands.router)
 
     await dp.start_polling(bot)
 

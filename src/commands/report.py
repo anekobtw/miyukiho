@@ -6,15 +6,10 @@ from utils.logging import log
 router = Router()
 
 
-@router.message(Command("report"))
+@router.message(F.reply_to_message, F.chat.type.in_({"group", "supergroup"}), Command("report"))
 async def report_cmd(message: types.Message):
     member = await message.chat.get_member(message.from_user.id)
     if not isinstance(member, (types.ChatMember)):
-        return
-
-    reply = message.reply_to_message
-    if not reply:
-        await message.reply("❗ Пожалуйста, используйте команду в ответ на сообщение пользователя.")
         return
 
     text = f"""
@@ -24,7 +19,7 @@ async def report_cmd(message: types.Message):
 <b>На кого:</b> @{reply.from_user.username}
 <b>Сообщение:</b> {reply.text}
 
-<b><a href='https://t.me/c/{str(message.chat.id)[4:]}/{reply.message_id}'>Ссылка на сообщение</a></b>
+<b><a href='https://t.me/c/{str(message.chat.id)[4:]}/{message.reply_to_message.message_id}'>Ссылка на сообщение</a></b>
 """
 
     await log(text=text)

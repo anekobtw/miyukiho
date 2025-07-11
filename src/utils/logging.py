@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-bot = Bot(token=os.getenv("TOKEN"), default=DefaultBotProperties(parse_mode="HTML"))
+bot = Bot(token=os.getenv("BOT_TOKEN"), default=DefaultBotProperties(parse_mode="HTML"))
 
 
 async def log(text: str):
