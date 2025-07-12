@@ -1,4 +1,4 @@
-# Moderation bot
+# Miyukiyho
 
 # 🛠️ How to install
 
@@ -14,22 +14,11 @@ python3 -m venv .venv
 source .venv/bin/activate
 cd src
 pip install -r requirements.txt
-
-# Installing postgres
-sudo apt install postgresql postgresql-contrib  # if you're on Liunux
-sudo systemctl start postgresql
-sudo systemctl enable postgresql
-sudo -i -u postgres
-psql
-ALTER USER postgres PASSWORD 'yourpassword';  # SET YOUR PASSWORD
-\q
 ```
 
 ## Windows
 
 https://www.python.org/downloads/ - Install Python
-
-https://www.postgresql.org/download/windows/ - Install postgres
 
 ```bash
 # Creating virtual environment

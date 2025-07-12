@@ -1,3 +1,4 @@
+import random
 import time
 from collections import defaultdict
 
@@ -32,7 +33,7 @@ def format_antispam(reason: str, emoji: str, message: types.Message) -> str:
         message=message.text,
         chat_id=str(message.chat.id)[4:],
         message_id=message.message_id,
-        user_id=message.from_user.id
+        user_id=message.from_user.id,
     )
 
 
@@ -55,3 +56,24 @@ async def message_handler(message: types.Message):
         await message.reply("⚠️ Не спамь!")
         await log(format_antispam("Спам", "🔴", message))
         await mute(message.chat, user_id, "1m")
+
+    # --- 8ball
+    if message.text.startswith("@" + (await message.bot.get_me()).username):
+        EIGHTBALL_ANSWERS = [
+            "Да.",
+            "Нет.",
+            "Возможно.",
+            "Скорее всего.",
+            "Спроси позже.",
+            "Точно нет.",
+            "Без сомнений.",
+            "Определённо да.",
+            "Не думаю.",
+            "Шансы малы.",
+            "Конечно!",
+            "Хаха, нет.",
+            "Слишком туманно...",
+            "Лучше не знать.",
+        ]
+
+        await message.reply(f"🎱 {random.choice(EIGHTBALL_ANSWERS)}")

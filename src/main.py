@@ -8,7 +8,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from dotenv import load_dotenv
 
 import commands
-import games
+# import games
 
 
 async def run_bot() -> None:
@@ -24,7 +24,7 @@ async def run_bot() -> None:
     dp = Dispatcher(storage=storage)
 
     dp.include_router(commands.router)
-    dp.include_router(games.router)
+    # dp.include_router(games.router)
 
     await dp.start_polling(bot)
 
