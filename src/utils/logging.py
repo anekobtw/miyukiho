@@ -9,6 +9,6 @@ load_dotenv()
 bot = Bot(token=os.getenv("BOT_TOKEN"), default=DefaultBotProperties(parse_mode="HTML"))
 
 
-async def log(text: str):
+async def log(text: str, disable_notification: bool = False):
     if text:
-        await bot.send_message(chat_id=os.getenv("LOGS_CHANNEL"), text=text)
+        await bot.send_message(chat_id=os.getenv("LOGS_CHANNEL"), text=text, disable_notification=disable_notification)
