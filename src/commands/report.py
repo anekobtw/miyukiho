@@ -1,5 +1,5 @@
 from aiogram import F, Router, types
-from aiogram.filters.command import Command
+from aiogram.filters import Command
 
 from utils.logging import log
 
