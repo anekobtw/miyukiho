@@ -19,6 +19,8 @@ ANTISPAM_TEMPLATE = """
 <b>Сообщение:</b> {message}
 
 <b><a href='https://t.me/c/{chat_id}/{message_id}'>Ссылка на сообщение</a></b>
+
+<b>#spam #id{user_id}</b>
 """
 
 
@@ -30,6 +32,7 @@ def format_antispam(reason: str, emoji: str, message: types.Message) -> str:
         message=message.text,
         chat_id=str(message.chat.id)[4:],
         message_id=message.message_id,
+        user_id=message.from_user.id
     )
 
 
