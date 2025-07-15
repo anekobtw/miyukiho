@@ -1,5 +1,7 @@
 # Miyukiyho
 
+A personal Telegram moderation bot. Powerful, yet easy to set up.
+
 # 🛠️ How to install
 
 ## Linux
